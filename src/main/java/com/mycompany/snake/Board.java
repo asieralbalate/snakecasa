@@ -12,6 +12,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.Vector;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 import javax.swing.Timer;
 
@@ -187,6 +189,12 @@ public class Board extends javax.swing.JPanel implements InitGamer{
         }
     }
 
+   public void processGameOver() {
+       JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+       GameOverDialog gOverDialog = new GameOverDialog(topFrame, true);
+       gOverDialog.setVisible(true);
+   }
+    
     private void paintGameOver(Graphics g) {
         Util.drawSquare(g, 15, 15, squareWidth(), squareHeight(), SquareType.HEAD);
     }
