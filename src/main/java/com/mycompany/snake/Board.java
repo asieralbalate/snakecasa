@@ -33,6 +33,7 @@ public class Board extends javax.swing.JPanel implements InitGamer{
     private List<Direction> movements;
     private FoodFactory foodFactory;
     private Incrementer incrementer;
+    private int highScore;
 
     /**
      * Creates new form Board
@@ -72,7 +73,7 @@ public class Board extends javax.swing.JPanel implements InitGamer{
                 tick();
             }
         });
-
+        highScore = 0;
     }
 
     public void initGame() {
@@ -99,8 +100,7 @@ public class Board extends javax.swing.JPanel implements InitGamer{
                 food = generateFood();
             }
         } else {
-            
-            timer.stop();
+            processGameOver();
         }
 
         repaint();
@@ -190,8 +190,16 @@ public class Board extends javax.swing.JPanel implements InitGamer{
     }
 
    public void processGameOver() {
+       timer.stop();
        JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
        GameOverDialog gOverDialog = new GameOverDialog(topFrame, true);
+       gOverDialog.setInitGamer(this);
+       gOverDialog.setScore(incrementer.getScore());
+       if(incrementer.getScore() > highScore){
+           highScore = incrementer.getScore();
+       }
+       gOverDialog.setName();
+       gOverDialog.setHighScore(highScore);
        gOverDialog.setVisible(true);
    }
     

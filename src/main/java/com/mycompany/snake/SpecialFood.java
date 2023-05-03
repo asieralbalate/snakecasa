@@ -5,9 +5,8 @@
 package com.mycompany.snake;
 
 import java.awt.Graphics;
-import java.util.Calendar;
 import java.util.Random;
-import javax.swing.Timer;
+
 
 /**
  *
